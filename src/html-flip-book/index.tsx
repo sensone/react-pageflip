@@ -15,6 +15,7 @@ interface IProps extends IFlipSetting, IEventProps {
     style: React.CSSProperties;
     children: React.ReactNode;
     renderOnlyPageLengthChange?: boolean;
+    renderForcePagesChange?: boolean;
 }
 
 const HTMLFlipBookForward = React.forwardRef(
@@ -61,8 +62,8 @@ const HTMLFlipBookForward = React.forwardRef(
                     });
                 });
 
-                if (!props.renderOnlyPageLengthChange || pages.length !== childList.length) {
-                    if (childList.length < pages.length) {
+                if (!props.renderOnlyPageLengthChange || props.renderForcePagesChange || pages.length !== childList.length) {
+                    if (props.renderForcePagesChange || childList.length < pages.length) {
                         refreshOnPageDelete();
                     }
 
